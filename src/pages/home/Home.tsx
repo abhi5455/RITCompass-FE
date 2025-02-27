@@ -8,7 +8,8 @@ function Home() {
     const navigate = useNavigate();
     const [promptText, setPromptText] = useState<string>('');
     const [greeting, setGreeting] = useState<string>('Good Morning');
-
+    const [isTimelineVisible, setIsTimelineVisible] = useState<boolean>(false);
+    const [isWelcomeMsgVisible, setIsWelcomeMsgVisible] = useState<boolean>(true);
 
     useEffect(() => {
         const hour = new Date().getHours();
@@ -21,6 +22,17 @@ function Home() {
             setGreeting("Good Evening");
         }
     }, []);
+    useEffect(() => {
+        if(isWelcomeMsgVisible){
+            setTimeout(() => {
+                setIsWelcomeMsgVisible(!isTimelineVisible);
+            }, 800);
+        }
+        else{
+            setIsWelcomeMsgVisible(!isTimelineVisible);
+        }
+
+    }, [isTimelineVisible]);
 
     return (
         <div className="flex-1 min-h-[100vh]">
@@ -30,42 +42,48 @@ function Home() {
                     <Info color={'white'} width={24}
                           onClick={() => navigate("/info")}
                     />
-                <div
-                    className={'flex items-center justify-center bg-[#353c52] text-white text-[13px] w-fit px-3 py-2 rounded-full gap-2 cursor-pointer hover:scale-[1.05] transition-transform duration-250 ease-in-out'}
-                    onClick={() => {
-                        navigate("/signup")
-                        console.log('wqasxzgkyuf')
-                    }
-                    }
-                >
-                    <UserRound height={20} width={20}/>
-                    Sign up
-                </div>
+                    <div
+                        className={'flex items-center justify-center bg-[#353c52] text-white text-[13px] w-fit px-3 py-2 rounded-full gap-2 cursor-pointer hover:scale-[1.05] transition-transform duration-250 ease-in-out'}
+                        onClick={() => {
+                            navigate("/signup")
+                            console.log('wqasxzgkyuf')
+                        }
+                        }
+                    >
+                        <UserRound height={20} width={20}/>
+                        Sign up
+                    </div>
                 </div>
             </header>
-            <div className={'text-[#f2ddcc] text-[32px] flex flex-col items-center justify-center mt-15 w-full gap-2'}>
+            {isWelcomeMsgVisible &&
                 <div
-                    className="text-center mb-6 font-bold text-transparent text-5xl flex-col items-center justify-center mt-15 bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 bg-clip-text"
-                >
-                    <p className="mb-4">Hey {greeting}</p>
-                    How can I help you Today?
+                    className={`text-[#f2ddcc] text-[32px] flex flex-col items-center justify-center mt-15 w-full gap-2 transition-all duration-800 ${
+                        isTimelineVisible ? "opacity-0" : "opacity-100"
+                    }`}>
+                    <div
+                        className="text-center mb-6 font-bold text-transparent text-5xl flex-col items-center justify-center mt-15 bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 bg-clip-text"
+                    >
+                        <p className="mb-4">Hey {greeting}</p>
+                        How can I help you Today?
+                    </div>
+
+                    <RotatingText
+                        texts={['Get Things Done Faster at RIT!', 'Find What You Need, Instantly', 'Get Info Fast, Move Ahead!', 'Navigate RIT with Ease!']}
+                        mainClassName="px-2 sm:px-2 md:px-3 bg-transparent text-[#f2ddcc] overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg transition-all text-[22px]"
+                        staggerFrom={"last"}
+                        initial={{y: "100%"}}
+                        animate={{y: 0}}
+                        exit={{y: "-120%"}}
+                        staggerDuration={0.055}
+                        splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+                        transition={{type: "spring", damping: 30, stiffness: 400}}
+                        rotationInterval={5000}
+                    />
                 </div>
-
-                <RotatingText
-                    texts={['Get Things Done Faster at RIT!', 'Find What You Need, Instantly', 'Get Info Fast, Move Ahead!', 'Navigate RIT with Ease!']}
-                    mainClassName="px-2 sm:px-2 md:px-3 bg-transparent text-[#f2ddcc] overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg transition-all text-[22px]"
-                    staggerFrom={"last"}
-                    initial={{y: "100%"}}
-                    animate={{y: 0}}
-                    exit={{y: "-120%"}}
-                    staggerDuration={0.055}
-                    splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-                    transition={{type: "spring", damping: 30, stiffness: 400}}
-                    rotationInterval={5000}
-                />
-            </div>
-            <div className={'absolute bottom-12 w-[100vw] flex items-center justify-center'}>
-
+            }
+            <div className={`absolute w-[100vw] flex items-center justify-center transition-all duration-500 ${
+                isTimelineVisible ? "top-[100px]" : "top-[550px]"}`}
+            >
                 <GradientText
                     colors={["#6074ff", "#9a57ff", "#af49ff", "#c951bf", "#ee3e61", "#f92e3d"]}
                     animationSpeed={3}
@@ -86,7 +104,11 @@ function Home() {
                         <Mic color={'#f2ddcc'} height={22} width={22}
                              className="cursor-pointer hover:scale-[1.1] transition-transform duration-250 ease-in-out ml-1"/>
                         <Send color={'#f2ddcc'} height={22} width={22}
-                              className="cursor-pointer hover:scale-[1.1] transition-transform duration-250 ease-in-out ml-2"/>
+                              className="cursor-pointer hover:scale-[1.1] transition-transform duration-250 ease-in-out ml-2"
+                            onClick={()=>{
+                                setIsTimelineVisible(true)
+                            }}
+                        />
                     </div>
                 </GradientText>
             </div>
