@@ -25,13 +25,17 @@ function Home() {
         <div className="flex-1 min-h-[100vh]">
             <header className="flex items-center justify-between px-10 pl-15 min-h-[80px] font-poppins">
                 <img src="/Logo.svg" alt="My Image" width={120}/>
-                <div className={'flex items-center justify-center gap-6 cursor-pointer'}
-                     onClick={() => navigate("/info")}
-                >
-                    <Info color={'white'} width={24}/>
+                <div className={'flex items-center justify-center gap-6 cursor-pointer'}>
+                    <Info color={'white'} width={24}
+                          onClick={() => navigate("/info")}
+                    />
                 <div
                     className={'flex items-center justify-center bg-[#353c52] text-white text-[13px] w-fit px-3 py-2 rounded-full gap-2 cursor-pointer hover:scale-[1.05] transition-transform duration-250 ease-in-out'}
-                    onClick={() => navigate("/signup")}
+                    onClick={() => {
+                        navigate("/signup")
+                        console.log('wqasxzgkyuf')
+                    }
+                    }
                 >
                     <UserRound height={20} width={20}/>
                     Sign up
