@@ -1,6 +1,7 @@
 "use client"
 
 import {useEffect, useRef, useState} from "react"
+import { motion } from "framer-motion";
 
 interface Step {
     title: string
@@ -73,8 +74,11 @@ export default function Timeline() {
                 <div className="relative" ref={timelineDiv}>
                     <div className={`absolute left-6 w-0.5 bg-gray-700`} style={{ minHeight: `${timelineDivHeight}px` }}/>
                     {timelineData.map((data, index) => (
-                        <div key={index} className="relative mb-8 last:mb-0"
+                        <motion.div key={index} className="relative mb-8 last:mb-0"
                              ref={index === timelineData.length - 1 ? lastElementRef : null}
+                                    initial={{ opacity: 0, y: -20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: index * 0.2 }}
                         >
                             <div className="flex items-start">
                                 <div
@@ -88,7 +92,7 @@ export default function Timeline() {
                                     <p className="mt-1 text-sm text-gray-300">{data.description}</p>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
