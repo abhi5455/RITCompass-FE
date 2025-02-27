@@ -36,7 +36,6 @@ export default function Timeline() {
             <div className="w-full max-w-md">
                 <div className="relative">
                     <div className="absolute left-6 top-8 bottom-8 w-0.5 bg-gray-700" />
-
                     {timelineData.map((data, index) => (
                         <div key={index} className="relative mb-8 last:mb-0">
                             <div className="flex items-start">

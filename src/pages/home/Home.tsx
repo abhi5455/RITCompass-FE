@@ -112,7 +112,7 @@ function Home() {
                 </GradientText>
             </div>
             {isTimelineVisible &&
-                <div className={'mt-40 flex items-center justify-center transition-all duration-500'}>
+                <div className={'flex items-center justify-center transition-all duration-500'}>
                     <Timeline/>
                 </div>
             }
