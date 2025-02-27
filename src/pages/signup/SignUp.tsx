@@ -10,27 +10,17 @@ export default function SignUp() {
     const [signupType, setSignupType] = useState("signup");
 
     return (
-        <div className="flex-1 min-h-[100vh]">
-            <header className="flex items-center justify-between px-10 pl-15 min-h-[80px] font-poppins">
-                <img src="/Logo.svg" alt="My Image" width={120}/>
-                <div className={'flex gap-6'}>
-                    <div className={'text-[#bfc2ca] hover:text-white cursor-pointer'}
-                        onClick={()=>{
-                            if(signupType === 'signup')
-                                setSignupType("login");
-                            else
-                                setSignupType("signup");
-                        }}
-                    >
-                        {signupType === 'signup' ? 'Login' : 'Sign up'}
-                    </div>
-                    <House height={25} width={25} color="white"
-                           className="cursor-pointer hover:scale-[1.1] transition-transform duration-250 ease-in-out ml-1 mr-5"
-                           onClick={() => navigate("/")}
-                    />
-                </div>
-            </header>
-            <div className={' w-full flex items-center justify-center mt-15'}>
+        <div className="flex min-h-[100vh] items-center justify-center">
+            <div
+                className={'absolute top-5 right-10 flex items-center justify-center bg-[#353c52] text-white text-[13px] w-fit px-3 py-2 rounded-full gap-2 cursor-pointer hover:scale-[1.05] transition-transform duration-250 ease-in-out'}
+                onClick={() => navigate("/")}
+            >
+                <House height={20} width={20} color="white"
+                       className="cursor-pointer hover:scale-[1.1] transition-transform duration-250 ease-in-out ml-1"
+                />
+                Home
+            </div>
+            <div className={'w-full flex items-center justify-center h-fit'}>
                 <div
                     className="relative w-[400px] h-[500px] rounded-[20px] overflow-hidden shadow shadow-[0px_20px_50px_rgba(0, 102, 255, 0.3)]">
 
@@ -70,6 +60,17 @@ export default function SignUp() {
                                 Sign up
                                 <ArrowRight width={15}/>
                             </button>
+
+                            <div className={'text-[#bfc2ca] hover:text-white cursor-pointer'}
+                                 onClick={() => {
+                                     if (signupType === 'signup')
+                                         setSignupType("login");
+                                     else
+                                         setSignupType("signup");
+                                 }}
+                            >
+                                {signupType === 'signup' ? 'Login' : 'Sign up'}
+                            </div>
                         </div> :
                         <div className="absolute inset-0 flex flex-col items-center justify-center z-10 gap-5">
                             <div className="flex flex-col items-center justify-center text-[#f0f6fc] text-[22px]">
@@ -94,6 +95,17 @@ export default function SignUp() {
                                 Login
                                 <ArrowRight width={15}/>
                             </button>
+
+                            <div className={'text-[#bfc2ca] hover:text-white cursor-pointer'}
+                                 onClick={() => {
+                                     if (signupType === 'signup')
+                                         setSignupType("login");
+                                     else
+                                         setSignupType("signup");
+                                 }}
+                            >
+                                {signupType === 'signup' ? 'Login' : 'Sign up'}
+                            </div>
                         </div>
                     }
                 </div>
