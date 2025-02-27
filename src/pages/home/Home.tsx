@@ -1,4 +1,4 @@
-import {Info, Mic, Send, UserRound} from 'lucide-react';
+import {Info, Mic, NotebookPen, Send, UserRound} from 'lucide-react';
 import {useEffect, useState} from "react";
 import GradientText from "../../components/GradientText/GradientText.tsx";
 import {useNavigate} from "react-router-dom";
@@ -63,6 +63,7 @@ function Home() {
             <div className={`absolute w-[100vw] flex items-center justify-center transition-all duration-500 ${
                 isTimelineVisible ? "top-[100px]" : "top-[550px]"}`}
             >
+                <div className={'relative flex'}>
                 <GradientText
                     colors={["#6074ff", "#9a57ff", "#af49ff", "#c951bf", "#ee3e61", "#f92e3d"]}
                     animationSpeed={3}
@@ -105,6 +106,21 @@ function Home() {
                         />
                     </div>
                 </GradientText>
+                {isTimelineVisible &&
+                    <div className="relative group">
+                        <div
+                            className="absolute flex items-center justify-center transition-all duration-500 top-4 right-[-60px] hover:scale-[1.1] cursor-pointer duration-250 ease-in-out ml-2"
+                        >
+                            <NotebookPen color={'#f2ddcc'} height={22} width={22}/>
+                        </div>
+                        {/* Tooltip */}
+                        <span
+                            className="absolute top-[40px] right-[-150px] bg-gray-800 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    Draft a Letter
+                            </span>
+                    </div>
+                }
+                </div>
             </div>
             {!isWelcomeMsgVisible &&
                 <div className={'flex items-center justify-center transition-all duration-500 mt-22'}>
