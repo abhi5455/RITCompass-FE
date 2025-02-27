@@ -1,10 +1,10 @@
 import {UserRound, Mic, Send} from 'lucide-react';
 import {useEffect, useState} from "react";
-import RotatingText from './components/RotatingText/RotatingText.tsx'
-import GradientText from "./components/GradientText/GradientText.tsx";
+import RotatingText from '../../components/RotatingText/RotatingText.tsx'
+import GradientText from "../../components/GradientText/GradientText.tsx";
 import {useNavigate} from "react-router-dom";
 
-function App() {
+function Home() {
     const navigate = useNavigate();
     const [promptText, setPromptText] = useState<string>('');
     const [greeting, setGreeting] = useState<string>('Good Morning');
@@ -84,4 +84,4 @@ function App() {
     )
 }
 
-export default App
+export default Home
