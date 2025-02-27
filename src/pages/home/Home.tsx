@@ -111,7 +111,7 @@ function Home() {
                     </div>
                 </GradientText>
             </div>
-            {isTimelineVisible &&
+            {!isWelcomeMsgVisible &&
                 <div className={'flex items-center justify-center transition-all duration-500'}>
                     <Timeline/>
                 </div>
