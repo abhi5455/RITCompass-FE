@@ -6,7 +6,7 @@ export default function Info() {
 
     return (
         <div className="flex-1 min-h-screen bg-gray-900 text-white pb-10">
-            <header className="flex items-center justify-between px-10 py-5 font-poppins bg-gray-800">
+            <header className="fixed top-0 w-full flex items-center justify-between px-10 py-5 font-poppins bg-gray-800">
                 <img src="/Logo.svg" alt="My Image" width={120}/>
                 <House
                     height={25}
@@ -17,7 +17,7 @@ export default function Info() {
                 />
             </header>
 
-            <div className="flex flex-1 items-center justify-center mt-10">
+            <div className="flex flex-1 items-center justify-center mt-30">
                 <div className="w-4/5 p-6 rounded-2xl bg-[#18213B] text-black shadow-lg">
                     <div className="flex items-center gap-4">
                         <div>
