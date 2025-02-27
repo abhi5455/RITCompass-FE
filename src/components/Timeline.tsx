@@ -8,25 +8,27 @@ interface Step {
     description: string
 }
 
-export default function Timeline() {
-    const [timelineData, setTimelineData] = useState<Step[]>([
-        {
-            title: "Draft a letter",
-            description: "Simply draft a letter and include the details for submitting the letter.",
-        },
-        {
-            title: "Get forwarded from advisor",
-            description: "Get the letter signed and approved from the advisor",
-        },
-        {
-            title: "Get forwarded from HOD",
-            description: "Get the letter signed and approved from the HOD",
-        },
-        {
-            title: "Get signed from Principal",
-            description: "Get the letter signed and approved from the Principal",
-        },
-    ])
+export default function Timeline({timelineData}: {
+    timelineData: Step[]
+}) {
+    // const [timelineData, setTimelineData] = useState<Step[]>([
+    //     {
+    //         title: "Draft a letter",
+    //         description: "Simply draft a letter and include the details for submitting the letter.",
+    //     },
+    //     {
+    //         title: "Get forwarded from advisor",
+    //         description: "Get the letter signed and approved from the advisor",
+    //     },
+    //     {
+    //         title: "Get forwarded from HOD",
+    //         description: "Get the letter signed and approved from the HOD",
+    //     },
+    //     {
+    //         title: "Get signed from Principal",
+    //         description: "Get the letter signed and approved from the Principal",
+    //     },
+    // ])
 
     const timelineDiv = useRef<HTMLDivElement | null>(null);
     const [timelineDivHeight, setTimelineDivHeight] = useState<number>(20);
@@ -36,10 +38,10 @@ export default function Timeline() {
         if (timelineDiv.current) {
             if ("offsetHeight" in timelineDiv.current) {
                 let lastElementHeight
-                if ("offsetHeight" in lastElementRef.current) {
+                if ("offsetHeight" in lastElementRef.current!) {
                     lastElementHeight = lastElementRef.current.offsetHeight;
                 }
-                setTimelineDivHeight(timelineDiv.current.offsetHeight - lastElementHeight);
+                setTimelineDivHeight(timelineDiv.current.offsetHeight - lastElementHeight!);
             }
         }
     }, []);

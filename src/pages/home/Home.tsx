@@ -1,9 +1,11 @@
-import {UserRound, Mic, Send, Info} from 'lucide-react';
+import {Info, Mic, Send, UserRound} from 'lucide-react';
 import {useEffect, useState} from "react";
-import RotatingText from '../../components/RotatingText/RotatingText.tsx'
 import GradientText from "../../components/GradientText/GradientText.tsx";
 import {useNavigate} from "react-router-dom";
-import Timeline from "../timeline/Timeline.tsx";
+import Timeline from "../../components/Timeline.tsx";
+import {WelcomeText} from "../../components/WelcomeText.tsx";
+import axios from "axios";
+import {BASE_URL} from "../../data/data.ts";
 
 function Home() {
     const navigate = useNavigate();
@@ -11,6 +13,8 @@ function Home() {
     const [greeting, setGreeting] = useState<string>('Good Morning');
     const [isTimelineVisible, setIsTimelineVisible] = useState<boolean>(false);
     const [isWelcomeMsgVisible, setIsWelcomeMsgVisible] = useState<boolean>(true);
+    const [loading, setLoading] = useState(false);
+    const [timelines, setTimelines] = useState([]);
 
     useEffect(() => {
         const hour = new Date().getHours();
@@ -54,32 +58,8 @@ function Home() {
                     </div>
                 </div>
             </header>
-            {isWelcomeMsgVisible &&
-                <div
-                    className={`text-[#f2ddcc] text-[32px] flex flex-col items-center justify-center mt-15 w-full gap-2 transition-all duration-800 ${
-                        isTimelineVisible ? "opacity-0" : "opacity-100"
-                    }`}>
-                    <div
-                        className="text-center mb-6 font-bold text-transparent text-5xl flex-col items-center justify-center mt-15 bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 bg-clip-text"
-                    >
-                        <p className="mb-4">Hey {greeting}</p>
-                        How can I help you Today?
-                    </div>
-
-                    <RotatingText
-                        texts={['Get Things Done Faster at RIT!', 'Find What You Need, Instantly', 'Get Info Fast, Move Ahead!', 'Navigate RIT with Ease!']}
-                        mainClassName="px-2 sm:px-2 md:px-3 bg-transparent text-[#f2ddcc] overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg transition-all text-[22px]"
-                        staggerFrom={"last"}
-                        initial={{y: "100%"}}
-                        animate={{y: 0}}
-                        exit={{y: "-120%"}}
-                        staggerDuration={0.055}
-                        splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-                        transition={{type: "spring", damping: 30, stiffness: 400}}
-                        rotationInterval={5000}
-                    />
-                </div>
-            }
+            <WelcomeText welcomeMsgVisible={isWelcomeMsgVisible} timelineVisible={isTimelineVisible}
+                         greeting={greeting}/>
             <div className={`absolute w-[100vw] flex items-center justify-center transition-all duration-500 ${
                 isTimelineVisible ? "top-[100px]" : "top-[550px]"}`}
             >
@@ -105,7 +85,22 @@ function Home() {
                         <Send color={'#f2ddcc'} height={22} width={22}
                               className="cursor-pointer hover:scale-[1.1] transition-transform duration-250 ease-in-out ml-2"
                               onClick={() => {
-                                  setIsTimelineVisible(true)
+                                  if (!isTimelineVisible)
+                                      setIsTimelineVisible(true);
+
+                                  console.log(BASE_URL)
+
+                                  setLoading(true);
+                                  axios.post(`${BASE_URL}/llm/ask`, {
+                                      msg: promptText,
+                                      chat_id: 'abc'
+                                  }).then((response) => {
+                                      console.log(response.data);
+                                      setLoading(false);
+                                  }).catch((error) => {
+                                      console.error(error);
+                                      setLoading(false);
+                                  });
                               }}
                         />
                     </div>
@@ -113,7 +108,10 @@ function Home() {
             </div>
             {!isWelcomeMsgVisible &&
                 <div className={'flex items-center justify-center transition-all duration-500 mt-22'}>
-                    <Timeline/>
+                    {timelines.map((timeline, index) => (
+                        <Timeline timelineData={timeline} key={index}/>
+                    ))}
+                    {loading && <div className="w-full py-5 text-center text-2xl text-white">Loading....</div>}
                 </div>
             }
         </div>
