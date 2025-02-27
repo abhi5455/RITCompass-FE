@@ -6,8 +6,6 @@ import { motion } from "framer-motion";
 interface Step {
     title: string
     description: string
-    completed: boolean
-    active: boolean
 }
 
 export default function Timeline() {
@@ -15,26 +13,18 @@ export default function Timeline() {
         {
             title: "Draft a letter",
             description: "Simply draft a letter and include the details for submitting the letter.",
-            completed: false,
-            active: true,
         },
         {
             title: "Get forwarded from advisor",
             description: "Get the letter signed and approved from the advisor",
-            completed: false,
-            active: false,
         },
         {
             title: "Get forwarded from HOD",
             description: "Get the letter signed and approved from the HOD",
-            completed: false,
-            active: false,
         },
         {
             title: "Get signed from Principal",
             description: "Get the letter signed and approved from the Principal",
-            completed: false,
-            active: false,
         },
     ])
 
