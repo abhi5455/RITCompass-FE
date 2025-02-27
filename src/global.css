@@ -6,3 +6,6 @@ body {
     background: radial-gradient(ellipse at top, #172440, #101524),
     radial-gradient(ellipse at bottom, #101524, #101524);
 }
+*{
+    scrollbar-width: none;
+}

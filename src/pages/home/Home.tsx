@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import RotatingText from '../../components/RotatingText/RotatingText.tsx'
 import GradientText from "../../components/GradientText/GradientText.tsx";
 import {useNavigate} from "react-router-dom";
+import Timeline from "../timeline/Timeline.tsx";
 
 function Home() {
     const navigate = useNavigate();
@@ -23,15 +24,13 @@ function Home() {
         }
     }, []);
     useEffect(() => {
-        if(isWelcomeMsgVisible){
+        if (isWelcomeMsgVisible) {
             setTimeout(() => {
                 setIsWelcomeMsgVisible(!isTimelineVisible);
             }, 800);
-        }
-        else{
+        } else {
             setIsWelcomeMsgVisible(!isTimelineVisible);
         }
-
     }, [isTimelineVisible]);
 
     return (
@@ -105,13 +104,18 @@ function Home() {
                              className="cursor-pointer hover:scale-[1.1] transition-transform duration-250 ease-in-out ml-1"/>
                         <Send color={'#f2ddcc'} height={22} width={22}
                               className="cursor-pointer hover:scale-[1.1] transition-transform duration-250 ease-in-out ml-2"
-                            onClick={()=>{
-                                setIsTimelineVisible(true)
-                            }}
+                              onClick={() => {
+                                  setIsTimelineVisible(true)
+                              }}
                         />
                     </div>
                 </GradientText>
             </div>
+            {isTimelineVisible &&
+                <div className={'mt-40 flex items-center justify-center transition-all duration-500'}>
+                    <Timeline/>
+                </div>
+            }
         </div>
     )
 }
