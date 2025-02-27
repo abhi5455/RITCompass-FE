@@ -30,25 +30,11 @@ export default function Timeline() {
             completed: false,
             active: false,
         },
-
-
         {
-            title: "Get forwarded from HOD",
-            description: "Get the letter signed and approved from the HOD",
+            title: "Get signed from Principal",
+            description: "Get the letter signed and approved from the Principal",
             completed: false,
             active: false,
-        },
-        {
-            title: "Get forwarded from HOD",
-            description: "Get the letter signed and approved from the HOD",
-            completed: false,
-            active: false,
-        },
-        {
-            title: "Draft a letter",
-            description: "Simply draft a letter and include the details for submitting the letter.",
-            completed: false,
-            active: true,
         },
     ])
 
