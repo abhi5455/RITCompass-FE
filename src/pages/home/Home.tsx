@@ -9,6 +9,7 @@ function Home() {
     const [promptText, setPromptText] = useState<string>('');
     const [greeting, setGreeting] = useState<string>('Good Morning');
 
+
     useEffect(() => {
         const hour = new Date().getHours();
 
