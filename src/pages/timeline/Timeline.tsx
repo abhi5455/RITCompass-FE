@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import {useEffect, useRef, useState} from "react"
 
 interface Step {
     title: string
@@ -29,15 +29,53 @@ export default function Timeline() {
             completed: false,
             active: false,
         },
+
+
+        {
+            title: "Get forwarded from HOD",
+            description: "Get the letter signed and approved from the HOD",
+            completed: false,
+            active: false,
+        },
+        {
+            title: "Get forwarded from HOD",
+            description: "Get the letter signed and approved from the HOD",
+            completed: false,
+            active: false,
+        },
+        {
+            title: "Draft a letter",
+            description: "Simply draft a letter and include the details for submitting the letter.",
+            completed: false,
+            active: true,
+        },
     ])
 
+    const timelineDiv = useRef<HTMLDivElement | null>(null);
+    const [timelineDivHeight, setTimelineDivHeight] = useState<number>(20);
+    const lastElementRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (timelineDiv.current) {
+            if ("offsetHeight" in timelineDiv.current) {
+                let lastElementHeight
+                if ("offsetHeight" in lastElementRef.current) {
+                    lastElementHeight = lastElementRef.current.offsetHeight;
+                }
+                setTimelineDivHeight(timelineDiv.current.offsetHeight - lastElementHeight);
+            }
+        }
+    }, []);
+
     return (
-        <div className="min-h-screen flex items-center justify-center px-4">
+        <div className="flex items-start justify-center px-4 pb-4 pt-10 max-h-[520px] overflow-scroll">
             <div className="w-full max-w-md">
-                <div className="relative">
-                    <div className="absolute left-6 top-8 bottom-8 w-0.5 bg-gray-700" />
+                <div className="relative" ref={timelineDiv}>
+                    <div className={`absolute left-6 w-0.5 bg-gray-700`} style={{ minHeight: `${timelineDivHeight}px` }}/>
                     {timelineData.map((data, index) => (
-                        <div key={index} className="relative mb-8 last:mb-0">
+                        <div key={index} className="relative mb-8 last:mb-0"
+                             ref={index === timelineData.length - 1 ? lastElementRef : null}
+                        >
                             <div className="flex items-start">
                                 <div
                                     className={`z-10 flex items-center justify-center w-14 h-12 rounded-full text-white font-bold bg-blue-500`}

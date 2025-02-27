@@ -112,7 +112,7 @@ function Home() {
                 </GradientText>
             </div>
             {!isWelcomeMsgVisible &&
-                <div className={'flex items-center justify-center transition-all duration-500'}>
+                <div className={'flex items-center justify-center transition-all duration-500 mt-22'}>
                     <Timeline/>
                 </div>
             }
