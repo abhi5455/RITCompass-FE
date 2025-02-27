@@ -1,4 +1,4 @@
-import {UserRound, Mic, Send} from 'lucide-react';
+import {UserRound, Mic, Send, Info} from 'lucide-react';
 import {useEffect, useState} from "react";
 import RotatingText from '../../components/RotatingText/RotatingText.tsx'
 import GradientText from "../../components/GradientText/GradientText.tsx";
@@ -25,12 +25,17 @@ function Home() {
         <div className="flex-1 min-h-[100vh]">
             <header className="flex items-center justify-between px-10 pl-15 min-h-[80px] font-poppins">
                 <img src="/Logo.svg" alt="My Image" width={120}/>
+                <div className={'flex items-center justify-center gap-6 cursor-pointer'}
+                     onClick={() => navigate("/info")}
+                >
+                    <Info color={'white'} width={24}/>
                 <div
                     className={'flex items-center justify-center bg-[#353c52] text-white text-[13px] w-fit px-3 py-2 rounded-full gap-2 cursor-pointer hover:scale-[1.05] transition-transform duration-250 ease-in-out'}
                     onClick={() => navigate("/signup")}
                 >
                     <UserRound height={20} width={20}/>
                     Sign up
+                </div>
                 </div>
             </header>
             <div className={'text-[#f2ddcc] text-[32px] flex flex-col items-center justify-center mt-15 w-full gap-2'}>
