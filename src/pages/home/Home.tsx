@@ -127,13 +127,13 @@ const HistorySlideShow = ({isHistoryVisible, onClose}: {
                         </button>
                     </SheetTitle>
                     <SheetDescription
-                        className={'text-[#f0f6fc] flex flex-col justify-center items-start px-4 gap-2 mt-10 cursor-pointer'}>
+                        className={'text-[#f0f6fc] flex flex-col justify-center items-start px-4 gap-3 mt-10 cursor-pointer'}>
                         <>
                             {historyData.map((item, index) => (
                                 <button key={index}
-                                        className={'bg-gray-800 px-2 py-1 rounded-lg flex justify-between items-center w-full cursor-pointer overflow-clip '}
+                                        className={'bg-gray-800 px-3 py-2 rounded-lg flex justify-between items-center w-full cursor-pointer overflow-clip '}
                                         onClick={() => onClose(item.title)}
-                                >{item.title}
+                                ><span className="break-words text-left w-[90%] pr-2">{item.title}</span>
                                     <Trash2 width={18} className={'text-red-500 hover:scale-[1.05]'}/>
                                 </button>
                             ))}
