@@ -1,4 +1,4 @@
-import {Info, Mail, Mic, Send, UserRound} from 'lucide-react';
+import {Info, Mail, Mic, Send, UserRound, History, Trash2, X} from 'lucide-react';
 import {useEffect, useState} from "react";
 import GradientText from "../../components/GradientText/GradientText.tsx";
 import {useNavigate} from "react-router-dom";
@@ -6,6 +6,15 @@ import Timeline, {IStep} from "../../components/Timeline.tsx";
 import {WelcomeText} from "../../components/WelcomeText.tsx";
 import axios from "axios";
 import {BASE_URL} from "../../data/data.ts";
+
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+} from "@/components/ui/sheet"
+
 
 const tempData = [
     [
@@ -84,6 +93,58 @@ const tempData = [
     ]
 ]
 
+const historyData = [
+    {
+        title: 'I want a Bonafied qwaszyewyf8weytdsfywegdsfygwesydf8aetd8o6qtew86dfw8tdf8q6td6qtf'
+    },
+    {
+        title: 'Apply for scholarship'
+    },
+    {
+        title: 'Apology letter'
+    },
+    {
+        title: 'qasxuiydugh'
+    },
+]
+
+const HistorySlideShow = ({isHistoryVisible, onClose}: {
+    isHistoryVisible: boolean,
+    onClose: (title?: string) => void
+}) => {
+    return (
+        <Sheet open={isHistoryVisible} onOpenChange={() => onClose()}>
+            <SheetContent className={'bg-[#101524] text-white w-fit pr-5 min-w-[300px] p-2'}>
+                <SheetHeader>
+                    <SheetTitle className={'text-gray-400 flex justify-start items-center gap-2'}>
+                        <History/>
+                        History
+                        <button
+                            onClick={() => onClose()}
+                            className="border-none outline-none absolute top-3 right-3 text-gray-400 hover:text-white p-2 rounded-lg transition hover:bg-gray-700 mt-2"
+                        >
+                            <X size={20}/>
+                        </button>
+                    </SheetTitle>
+                    <SheetDescription
+                        className={'text-[#f0f6fc] flex flex-col justify-center items-start px-4 gap-2 mt-10 cursor-pointer'}>
+                        <>
+                            {historyData.map((item, index) => (
+                                <button key={index}
+                                        className={'bg-gray-800 px-2 py-1 rounded-lg flex justify-between items-center w-full cursor-pointer overflow-clip '}
+                                        onClick={() => onClose(item.title)}
+                                >{item.title}
+                                    <Trash2 width={18} className={'text-red-500 hover:scale-[1.05]'}/>
+                                </button>
+                            ))}
+                        </>
+                    </SheetDescription>
+                </SheetHeader>
+            </SheetContent>
+        </Sheet>
+    )
+}
+
 function Home() {
     const navigate = useNavigate();
     const [promptText, setPromptText] = useState<string>('');
@@ -92,6 +153,7 @@ function Home() {
     const [isWelcomeMsgVisible, setIsWelcomeMsgVisible] = useState<boolean>(true);
     const [loading, setLoading] = useState(false);
     const [timelines, setTimelines] = useState<IStep[][]>(tempData);
+    const [isHistoryVisible, setIsHistoryVisible] = useState<boolean>(false);
 
     console.log(timelines)
 
@@ -124,6 +186,11 @@ function Home() {
                     <div className={'flex items-center justify-center gap-6 cursor-pointer'}>
                         <Info color={'white'} width={24}
                               onClick={() => navigate("/info")}
+                        />
+                        <History color={'white'} width={24}
+                                 onClick={() => {
+                                     setIsHistoryVisible(!isHistoryVisible);
+                                 }}
                         />
                         <div
                             className={'flex items-center justify-center bg-[#353c52] text-white text-[13px] w-fit px-3 py-2 rounded-full gap-2 cursor-pointer hover:scale-[1.05] transition-transform duration-250 ease-in-out'}
@@ -205,6 +272,12 @@ function Home() {
                     {loading && <div className="w-full py-5 text-center text-2xl text-white">Loading....</div>}
                 </div>
             }
+            <HistorySlideShow isHistoryVisible={isHistoryVisible}
+                              onClose={(title?: string) => {
+                                  setIsHistoryVisible(false)
+                                  setPromptText(title? title : null);
+                              }}
+            />
         </div>
     )
 }
