@@ -134,7 +134,6 @@ const HistorySlideShow = ({isHistoryVisible, onClose}: {
                                         className={'bg-gray-800 px-3 py-2 rounded-lg flex justify-between items-center w-full cursor-pointer overflow-clip '}
                                         onClick={() => onClose(item.title)}
                                 ><span className="break-words text-left w-[90%] pr-2">{item.title}</span>
-                                    <Trash2 width={18} className={'text-red-500 hover:scale-[1.05]'}/>
                                 </button>
                             ))}
                         </>
