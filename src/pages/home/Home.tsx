@@ -127,7 +127,7 @@ const HistorySlideShow = ({isHistoryVisible, onClose}: {
                         </button>
                     </SheetTitle>
                     <SheetDescription
-                        className={'text-[#f0f6fc] flex flex-col justify-center items-start px-4 gap-3 mt-10 cursor-pointer'}>
+                        className={'text-[#f0f6fc] flex flex-col justify-center items-start px-3 gap-3 mt-10 cursor-pointer'}>
                         <>
                             {historyData.map((item, index) => (
                                 <button key={index}
