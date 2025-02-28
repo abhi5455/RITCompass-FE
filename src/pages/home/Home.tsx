@@ -76,7 +76,6 @@ function Home() {
     const [timelines, setTimelines] = useState<IStep[][]>([]);
     const [isHistoryVisible, setIsHistoryVisible] = useState<boolean>(false);
 
-    console.log(timelines)
 
     useEffect(() => {
         const hour = new Date().getHours();
@@ -154,8 +153,6 @@ function Home() {
                                   onClick={() => {
                                       if (!isTimelineVisible)
                                           setIsTimelineVisible(true);
-
-                                      console.log(BASE_URL)
 
                                       setLoading(true);
                                       axios.post(`${BASE_URL}/llm/ask`, {

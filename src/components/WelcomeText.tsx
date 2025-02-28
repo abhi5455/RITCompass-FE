@@ -15,7 +15,7 @@ export function WelcomeText(props: { welcomeMsgVisible: boolean, timelineVisible
                 </div>
 
                 <RotatingText
-                    texts={["Get Things Done Faster at RIT!", "Find What You Need, Instantly", "Get Info Fast, Move Ahead!", "Navigate RIT with Ease!"]}
+                    texts={["Get Things Done Faster at RIT!", "Find What You Need, Instantly", "Get Info Fast, Move Ahead!", "Navigate RIT with Ease!", "Generate your letters"]}
                     mainClassName="px-2 sm:px-2 md:px-3 bg-transparent text-[#f2ddcc] overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg transition-all text-[22px]"
                     staggerFrom={"last"}
                     initial={{y: "100%"}}
