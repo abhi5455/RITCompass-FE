@@ -128,8 +128,7 @@ function Home() {
                         <div
                             className={'flex items-center justify-center bg-[#353c52] text-white text-[13px] w-fit px-3 py-2 rounded-full gap-2 cursor-pointer hover:scale-[1.05] transition-transform duration-250 ease-in-out'}
                             onClick={() => {
-                                navigate("/signup")
-                                console.log('wqasxzgkyuf')
+                                navigate("/auth/signup")
                             }
                             }
                         >
