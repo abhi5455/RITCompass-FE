@@ -32,6 +32,8 @@ export default function Timeline({timelineData}: {
         }
     }, []);
 
+
+
     return (
         <div className="flex items-start justify-center px-4 pb-10 pt-10 overflow-scroll">
             <div className="w-full max-w-md">
@@ -58,8 +60,8 @@ export default function Timeline({timelineData}: {
                                     <div className="w-full flex items-center justify-between text-white text-sm mt-3">
                                         <div className="flex gap-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                 stroke-linecap="round" stroke-linejoin="round"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                                                 strokeLinecap="round" strokeLinejoin="round"
                                                  className="lucide lucide-user-round">
                                                 <circle cx="12" cy="8" r="5"/>
                                                 <path d="M20 21a8 8 0 0 0-16 0"/>
@@ -68,8 +70,8 @@ export default function Timeline({timelineData}: {
                                         </div>
                                         <div className="flex gap-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                 stroke-linecap="round" stroke-linejoin="round"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                                                 strokeLinecap="round" strokeLinejoin="round"
                                                  className="lucide lucide-hourglass">
                                                 <path d="M5 22h14"/>
                                                 <path d="M5 2h14"/>
@@ -82,15 +84,15 @@ export default function Timeline({timelineData}: {
                                         </div>
                                     </div>
                                     {data.related_links ?
-                                        <div>
-                                            {[...data.related_links].map((link, index) =>
+                                        <div className="space-x-2 mt-3">
+                                            {(Array.isArray(data.related_links) ? [...data.related_links] : [data.related_links]).map((link, index) =>
                                                 <TooltipProvider key={index}>
                                                     <Tooltip>
-                                                        <TooltipTrigger className="text-white mx-4">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                 height="24" viewBox="0 0 24 24" fill="none"
-                                                                 stroke="currentColor" stroke-width="2"
-                                                                 stroke-linecap="round" stroke-linejoin="round"
+                                                        <TooltipTrigger className="text-white">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                 height="16" viewBox="0 0 24 24" fill="none"
+                                                                 stroke="currentColor" strokeWidth="2"
+                                                                 strokeLinecap="round" strokeLinejoin="round"
                                                                  className="lucide lucide-link">
                                                                 <path
                                                                     d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>

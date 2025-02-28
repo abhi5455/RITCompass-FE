@@ -76,7 +76,7 @@ export default function LetterPreview({letterData, setPreviewOpen}: {
                 </div>
                 <button
                     className="px-8 py-3 rounded-md bg-[#131b30] text-white cursor-pointer hover:scale-95 transition-transform"
-                    onClick={reactToPrintFn}
+                    onClick={() => reactToPrintFn()}
                 >
                     Print
                 </button>

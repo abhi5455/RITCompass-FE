@@ -3,11 +3,14 @@ import {LetterLoader} from "@/components/LetterLoader.tsx";
 import axios from "axios";
 import {BASE_URL} from "@/data/data.ts";
 import LetterEditable, {ILetterType} from "@/pages/letter/LetterEditable.tsx";
+import {ArrowLeft} from "lucide-react";
+import {useNavigate} from "react-router-dom";
 
 export default function LetterPage() {
     const [loading, setLoading] = useState(false);
     const [editableOpen, setEditableOpen] = useState(false);
     const [generatedLetter, setGeneratedLetter] = useState<ILetterType | null>(null);
+    const navigate = useNavigate();
 
     if (editableOpen && generatedLetter) {
         return (
@@ -23,7 +26,12 @@ export default function LetterPage() {
 
     return (
         <div className="w-full h-[100dvh] flex items-center justify-center flex-col">
-            <h1 className="text-3xl text-white">Generate Letter</h1>
+            <h1 className="mx-auto w-[80%] max-w-[900px] text-3xl flex items-center justify-center text-white relative text-center">
+                <button onClick={() => navigate('/')} className="absolute left-0 cursor-pointer hover:text-red-500">
+                    <ArrowLeft/>
+                </button>
+                Generate Letter
+            </h1>
 
             <form
                 className="rounded-md relative mt-10 w-[80%] max-w-[900px] max-h-[80%] overflow-auto p-6 bg-white flex flex-col"

@@ -1,97 +1,14 @@
-import {Info, Mail, Mic, Send, UserRound, History, Trash2, X} from 'lucide-react';
+import {History, Info, Mail, Mic, Send, UserRound, X} from 'lucide-react';
 import {useEffect, useState} from "react";
 import GradientText from "../../components/GradientText/GradientText.tsx";
 import {useNavigate} from "react-router-dom";
 import Timeline, {IStep} from "../../components/Timeline.tsx";
 import {WelcomeText} from "../../components/WelcomeText.tsx";
 import axios from "axios";
-import {BASE_URL} from "../../data/data.ts";
+import {BASE_URL} from "@/data/data.ts";
+import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle,} from "@/components/ui/sheet"
+import {WordRotate} from "@/components/magicui/word-rotate.tsx";
 
-import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-} from "@/components/ui/sheet"
-
-
-const tempData = [
-    [
-        {
-            "title": "Check Eligibility",
-            "description": "Ensure you meet the eligibility criteria based on category and income limit.",
-            "responsible_authority": "Student Affairs Office",
-            "expected_time": "2-3 days",
-            "related_links": ""
-        },
-        {
-            "title": "Apply Online",
-            "description": "Fill out the application on the official E-Grantz portal.",
-            "responsible_authority": "Student",
-            "expected_time": "1 hour",
-            "related_links": ""
-        },
-        {
-            "title": "Submit Documents",
-            "description": "Submit required documents like caste certificate, income certificate, and bank details.",
-            "responsible_authority": "College Office",
-            "expected_time": "5-7 days",
-            "related_links": ""
-        },
-        {
-            "title": "Verification & Approval",
-            "description": "The college and government authorities verify the documents and approve the scholarship.",
-            "responsible_authority": "Scholarship Department",
-            "expected_time": "2-3 weeks",
-            "related_links": ""
-        },
-        {
-            "title": "Scholarship Disbursal",
-            "description": "The scholarship amount is credited to the student's bank account.",
-            "responsible_authority": "State Government",
-            "expected_time": "1 month",
-            "related_links": ""
-        }
-    ],
-    [
-        {
-            "title": "Check Eligibility",
-            "description": "Ensure you meet the eligibility criteria based on category and income limit.",
-            "responsible_authority": "Student Affairs Office",
-            "expected_time": "2-3 days",
-            "related_links": ""
-        },
-        {
-            "title": "Apply Online",
-            "description": "Fill out the application on the official E-Grantz portal.",
-            "responsible_authority": "Student",
-            "expected_time": "1 hour",
-            "related_links": ""
-        },
-        {
-            "title": "Submit Documents",
-            "description": "Submit required documents like caste certificate, income certificate, and bank details.",
-            "responsible_authority": "College Office",
-            "expected_time": "5-7 days",
-            "related_links": ""
-        },
-        {
-            "title": "Verification & Approval",
-            "description": "The college and government authorities verify the documents and approve the scholarship.",
-            "responsible_authority": "Scholarship Department",
-            "expected_time": "2-3 weeks",
-            "related_links": ""
-        },
-        {
-            "title": "Scholarship Disbursal",
-            "description": "The scholarship amount is credited to the student's bank account.",
-            "responsible_authority": "State Government",
-            "expected_time": "1 month",
-            "related_links": ""
-        }
-    ]
-]
 
 const historyData = [
     {
@@ -141,6 +58,14 @@ const HistorySlideShow = ({isHistoryVisible, onClose}: {
     )
 }
 
+function LoadingText() {
+    return <WordRotate
+        className="text-xl text-white"
+        duration={7000}
+        words={["Thinking...", "Categorizing...", "Querying data...", "Generating..."]}
+    />
+}
+
 function Home() {
     const navigate = useNavigate();
     const [promptText, setPromptText] = useState<string>('');
@@ -148,7 +73,7 @@ function Home() {
     const [isTimelineVisible, setIsTimelineVisible] = useState<boolean>(false);
     const [isWelcomeMsgVisible, setIsWelcomeMsgVisible] = useState<boolean>(true);
     const [loading, setLoading] = useState(false);
-    const [timelines, setTimelines] = useState<IStep[][]>(tempData);
+    const [timelines, setTimelines] = useState<IStep[][]>([]);
     const [isHistoryVisible, setIsHistoryVisible] = useState<boolean>(false);
 
     console.log(timelines)
@@ -192,8 +117,7 @@ function Home() {
                             className={'flex items-center justify-center bg-[#353c52] text-white text-[13px] w-fit px-3 py-2 rounded-full gap-2 cursor-pointer hover:scale-[1.05] transition-transform duration-250 ease-in-out'}
                             onClick={() => {
                                 navigate("/auth/signup")
-                            }
-                            }
+                            }}
                         >
                             <UserRound height={20} width={20}/>
                             Sign up
@@ -261,18 +185,20 @@ function Home() {
                 <div
                     className={'flex flex-col items-center justify-center transition-all duration-500 mt-22 overflow-auto'}>
                     <div className="divide-y mt-3 divide-gray-700">
-                        {timelines.map((timeline, index) => (
-                            <Timeline timelineData={timeline} key={index}/>
-                        ))}
+                        {loading && <LoadingText/>}
+
+                        {!loading && timelines.length === 0 ?
+                            <div className="w-full py-5 text-center text-2xl text-white">No data found</div> :
+                            timelines.map((timeline, index) => (
+                                <Timeline timelineData={timeline} key={index}/>
+                            ))}
                     </div>
-                    {loading && <div className="w-full py-5 text-center text-2xl text-white">Loading....</div>}
                 </div>
             }
             <HistorySlideShow isHistoryVisible={isHistoryVisible}
                               onClose={(title?: string) => {
                                   setIsHistoryVisible(false)
-                                  setPromptText(title? title : null);
-
+                                  setPromptText(title ? title : '');
                               }}
             />
         </div>
