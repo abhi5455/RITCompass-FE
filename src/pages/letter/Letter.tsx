@@ -2,9 +2,24 @@ import {useState} from "react";
 import {LetterLoader} from "@/components/LetterLoader.tsx";
 import axios from "axios";
 import {BASE_URL} from "@/data/data.ts";
+import LetterEditable, {ILetterType} from "@/pages/letter/LetterEditable.tsx";
 
 export default function LetterPage() {
     const [loading, setLoading] = useState(false);
+    const [editableOpen, setEditableOpen] = useState(false);
+    const [generatedLetter, setGeneratedLetter] = useState<ILetterType | null>(null);
+
+    if (editableOpen && generatedLetter) {
+        return (
+            <LetterEditable
+                letterData={{
+                    ...generatedLetter,
+                    body: generatedLetter.content,
+                }}
+                setEditableOpen={setEditableOpen}
+            />
+        )
+    }
 
     return (
         <div className="w-full h-[100dvh] flex items-center justify-center flex-col">
@@ -35,6 +50,8 @@ export default function LetterPage() {
                     }).then((res) => {
                         console.log(res.data);
                         setLoading(false);
+                        setGeneratedLetter(res.data.letter);
+                        setEditableOpen(true);
                     }).catch((err) => {
                         console.error(err);
                     });
