@@ -150,9 +150,9 @@ function Home() {
                         className="border-0 p-[1px] border-white rounded-[20px] bg-[#161c2e]"
                     >
                         <div
-                            className={'bg-[#161c2e] px-5 py-2 rounded-[20px] border-0 border-[#333848] w-[710px] flex justify-around items-center'}>
+                            className={'bg-[#161c2e] px-5 py-2 rounded-[20px] border-0 border-[#333848] w-[740px] flex justify-around items-center'}>
                             <img src="/Compass.svg" alt="My Image" height={32} width={32}
-                                 className="cursor-pointer hover:scale-[1.1] transition-transform duration-250 ease-in-out"/>
+                                 className="cursor-pointer hover:scale-[1.1] transition-transform duration-250 ease-in-out mr-1"/>
                             <input
                                 type="text"
                                 value={promptText}
