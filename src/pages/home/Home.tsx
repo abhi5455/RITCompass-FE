@@ -95,16 +95,13 @@ const tempData = [
 
 const historyData = [
     {
-        title: 'I want a Bonafied qwaszyewyf8weytdsfywegdsfygwesydf8aetd8o6qtew86dfw8tdf8q6td6qtf'
+        title: 'I want a Bonafied'
     },
     {
         title: 'Apply for scholarship'
     },
     {
         title: 'Apology letter'
-    },
-    {
-        title: 'qasxuiydugh'
     },
 ]
 
@@ -275,6 +272,7 @@ function Home() {
                               onClose={(title?: string) => {
                                   setIsHistoryVisible(false)
                                   setPromptText(title? title : null);
+
                               }}
             />
         </div>
