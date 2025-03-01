@@ -12,13 +12,17 @@ export default function Login() {
 
         <div className="flex min-h-[100vh] items-center justify-center">
             <div
-                className={'absolute top-5 right-10 flex items-center justify-center bg-[#353c52] text-white text-[13px] w-fit px-3 py-2 rounded-full gap-2 cursor-pointer hover:scale-[1.05] transition-transform duration-250 ease-in-out'}
+                className={'absolute group top-4 right-8 flex items-center justify-center w-fit p-2 rounded-[20px] gap-2 cursor-pointer hover:scale-[1.05] transition-transform duration-250 ease-in-out'}
                 onClick={() => navigate("/")}
             >
-                <House height={20} width={20} color="white"
-                       className="cursor-pointer hover:scale-[1.1] transition-transform duration-250 ease-in-out ml-1"
+                <House height={25} width={25} color="white"
+                       className=""
                 />
-                Home
+                {/* Tooltip */}
+                <span
+                    className="absolute top-[40px] right-5 bg-[#4c5674] text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    Home
+                </span>
             </div>
             <div className={'w-full flex items-center justify-center h-fit'}>
                 <div
@@ -31,7 +35,7 @@ export default function Login() {
                     />
                     <div className="absolute inset-0 flex flex-col items-center justify-center z-10 gap-5">
                         <div className="flex flex-col items-center justify-center text-[#f0f6fc] text-[22px]">
-                            Login
+                        Login
                         </div>
                         <input
                             type="text"
