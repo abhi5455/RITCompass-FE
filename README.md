@@ -47,5 +47,8 @@ VITE_BASE_URL="url of the backend"
 ### 📌 In Action
 ![img2.png](/public/demoImg2.png)
 
+### 📌 Prompt History
+![img4.png](/public/demoImg4.png)
+
 ### 📌 Info page
 ![img3.png](/public/demoImg3.png)
