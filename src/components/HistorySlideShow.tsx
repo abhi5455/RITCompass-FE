@@ -3,15 +3,31 @@ import {History, X} from "lucide-react";
 
 const historyData = [
     {
-        title: 'I want a Bonafied'
+        title: 'Request for Name Correction in Records'
     },
     {
-        title: 'Apply for scholarship'
+        title: 'Apply for Hostel Admission'
     },
     {
-        title: 'Apology letter'
+        title: 'Request for Duplicate ID Card'
     },
-]
+    {
+        title: 'Apply for Exam Registration'
+    },
+    {
+        title: 'Request for Course Withdrawal'
+    },
+    {
+        title: 'Apply for Internship Approval Letter'
+    },
+    {
+        title: 'Request for Transfer Certificate'
+    },
+    {
+        title: 'Apply for Late Fee Waiver'
+    }
+];
+
 
 
 export const HistorySlideShow = ({isHistoryVisible, onClose}: {
@@ -33,7 +49,7 @@ export const HistorySlideShow = ({isHistoryVisible, onClose}: {
                         </button>
                     </SheetTitle>
                     <SheetDescription
-                        className={'text-[#f0f6fc] flex flex-col justify-center items-start px-2 gap-2.5 mt-8 cursor-pointer'}>
+                        className={'text-[#f0f6fc] flex flex-col justify-center items-start px-2 gap-3 mt-8 cursor-pointer'}>
                         <>
                             {historyData.map((item, index) => (
                                 <button key={index}
