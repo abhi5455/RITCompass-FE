@@ -33,7 +33,7 @@ interface ExpandableButtonProps {
     title: string
     onDelete: (title: string) => void
     promptHistory: (title: string) => void
-    index?: number
+    index: number
 }
 
 const ExpandableButton = ({title, onDelete, promptHistory, index}: ExpandableButtonProps) => {
@@ -104,7 +104,7 @@ export const HistorySlideShow = ({isHistoryVisible, onClose}: {
                         className={'text-[#f0f6fc] flex flex-col justify-center items-start px-2 gap-3 mt-8 cursor-pointer'}>
                         <>
                             {historyData.map((item, index) => (
-                                <ExpandableButton key={index} index={index} title={item.title}
+                                <ExpandableButton index={index} title={item.title}
                                                   onDelete={handleDelete} promptHistory={handlePromptHistory} />
                             ))}
                         </>
