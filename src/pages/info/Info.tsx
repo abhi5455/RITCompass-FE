@@ -21,7 +21,7 @@ export default function Info() {
                 <div className="w-4/5 p-6 rounded-2xl bg-[#18213B] text-black shadow-lg">
                     <div className="flex items-center gap-4">
                         <div>
-                            <span className="font-semibold text-[20px] text-[#2596be]">About</span>
+                            <span className="font-semibold text-[21px] text-[#2596be]">About</span>
                             <p className="mt-2 text-[15px] text-[#BFC2CA]">The Generalized Enquiry System (RITCOMPASS)
                                 for RIT is a smart digital platform designed to help students navigate administrative
                                 and academic procedures effortlessly. It acts as a campus-specific search engine,
@@ -33,7 +33,7 @@ export default function Info() {
                     </div>
                 </div>
             </div>
-            <div className="flex flex-1 items-center justify-center mt-10">
+            <div className="flex flex-1 items-center justify-center mt-7">
                 <div className="w-4/5 p-6 rounded-2xl bg-[#18213B] text-black shadow-lg">
                     <div className="flex items-center gap-4">
                         <div>
@@ -44,7 +44,7 @@ export default function Info() {
                 </div>
             </div>
             <div>
-                <div className="flex flex-1 items-center justify-center mt-10">
+                <div className="flex flex-1 items-center justify-center mt-7">
                     <div className="w-4/5 p-6 rounded-2xl bg-[#18213B] text-black shadow-lg">
                         <div className="flex items-center gap-4">
                             <div>
