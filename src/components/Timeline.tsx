@@ -1,11 +1,10 @@
 "use client"
 
-import {useEffect, useRef, useState} from "react"
-import {motion} from "framer-motion";
-import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,} from "@/components/ui/tooltip"
+import { useEffect, useState } from "react"
+import { motion } from "framer-motion"
+import {Clock, User, Link2, BadgeInfo} from "lucide-react"
 
-
-export interface IStep {
+interface IStep {
     title: string
     description: string
     responsible_authority: string
@@ -13,108 +12,99 @@ export interface IStep {
     related_links: string[] | string
 }
 
-export default function Timeline({timelineData}: {
-    timelineData: IStep[]
-}) {
-    const timelineDiv = useRef<HTMLDivElement | null>(null);
-    const [timelineDivHeight, setTimelineDivHeight] = useState<number>(20);
-    const lastElementRef = useRef<HTMLDivElement | null>(null);
+interface TimelineProps {
+    steps: IStep[],
+    remark?: string
+}
+
+export default function Timeline({ steps, remark}: TimelineProps) {
+    const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {
-        if (timelineDiv.current) {
-            if ("offsetHeight" in timelineDiv.current) {
-                let lastElementHeight
-                if ("offsetHeight" in lastElementRef.current!) {
-                    lastElementHeight = lastElementRef.current.offsetHeight;
-                }
-                setTimelineDivHeight(timelineDiv.current.offsetHeight - lastElementHeight!);
-            }
-        }
-    }, []);
-
-
+        setIsVisible(true)
+    }, [])
 
     return (
-        <div className="flex items-start justify-center px-4 pb-10 pt-10 overflow-scroll">
-            <div className="w-full max-w-md">
-                <div className="relative" ref={timelineDiv}>
-                    <div className={`absolute left-6 w-0.5 bg-gray-700`} style={{minHeight: `${timelineDivHeight}px`}}/>
-                    {timelineData.map((data, index) => (
-                        <motion.div key={index} className="relative mb-8 last:mb-0"
-                                    ref={index === timelineData.length - 1 ? lastElementRef : null}
-                                    initial={{opacity: 0, y: -20}}
-                                    animate={{opacity: 1, y: 0}}
-                                    transition={{duration: 0.5, delay: index * 0.2}}
+        <div className="w-full max-w-3xl mx-auto">
+            {steps.map((step, index) => (
+                <div key={index} className="flex relative">
+                    {/* Connecting Line */}
+                    {index < steps.length - 1 && (
+                        <motion.div
+                            className="absolute left-7 top-[63px] w-[2px] bg-blue-500"
+                            initial={{ height: 0 }}
+                            animate={isVisible ? { height: "calc(100% - 70px)" } : { height: 0 }}
+                            transition={{ duration: 0.5, delay: 0.3 + index * 0.4 }}
+                            style={{ zIndex: 0 }}
+                        />
+                    )}
+
+                    <div className="flex flex-col items-center mr-6 z-10">
+                        <motion.div
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={isVisible ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+                            transition={{ duration: 0.3, delay: index * 0.4 }}
+                            className="flex items-center justify-center w-14 h-14 rounded-full bg-blue-500 text-white font-bold text-xl"
                         >
-                            <div className="flex items-start">
-                                <div
-                                    className={`z-10 flex items-center justify-center w-14 h-12 rounded-full text-white font-bold bg-blue-500`}
-                                >
-                                    {index + 1}
-                                </div>
+                            {index + 1}
+                        </motion.div>
+                    </div>
 
-                                <div className="ml-4 p-4 w-full rounded-lg bg-[#1e293b]">
-                                    <h3 className="text-lg font-medium text-white">{data.title}</h3>
-                                    <p className="mt-1 text-sm text-gray-300">{data.description}</p>
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                        transition={{ duration: 0.4, delay: 0.1 + index * 0.4 }}
+                        className="bg-gray-800 rounded-lg p-5 mb-8 w-full"
+                    >
+                        <h3 className="text-xl font-semibold text-white mb-2">{step.title}</h3>
+                        <p className="text-gray-300 mb-4">{step.description}</p>
 
-                                    <div className="w-full flex items-center justify-between text-white text-sm mt-3">
-                                        <div className="flex gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-                                                 strokeLinecap="round" strokeLinejoin="round"
-                                                 className="lucide lucide-user-round">
-                                                <circle cx="12" cy="8" r="5"/>
-                                                <path d="M20 21a8 8 0 0 0-16 0"/>
-                                            </svg>
-                                            <span>{data.responsible_authority}</span>
+                        <div className="flex flex-col sm:flex-row sm:justify-between gap-2 text-gray-400">
+                            <div className="flex items-center gap-2">
+                                <User size={16} />
+                                <span>{step.responsible_authority}</span>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                                <Clock size={16} />
+                                <span>{step.expected_time}</span>
+                            </div>
+                        </div>
+
+                        {(Array.isArray(step.related_links) ? step.related_links.length > 0 : step.related_links) && (
+                            <div className="mt-3 pt-3 border-t border-gray-700">
+                                <div className="flex items-center gap-2">
+                                    <Link2 size={16} className="text-gray-400" />
+                                    {Array.isArray(step.related_links) ? (
+                                        <div className="flex flex-wrap gap-2">
+                                            {step.related_links.map((link, linkIndex) => (
+                                                <a key={linkIndex} href={link} className="text-blue-400 hover:text-blue-300 hover:underline">
+                                                    {link.replace(/^https?:\/\//, "").split("/")[0]}
+                                                </a>
+                                            ))}
                                         </div>
-                                        <div className="flex gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-                                                 strokeLinecap="round" strokeLinejoin="round"
-                                                 className="lucide lucide-hourglass">
-                                                <path d="M5 22h14"/>
-                                                <path d="M5 2h14"/>
-                                                <path
-                                                    d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/>
-                                                <path
-                                                    d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/>
-                                            </svg>
-                                            <span>{data.expected_time}</span>
-                                        </div>
-                                    </div>
-                                    {data.related_links ?
-                                        <div className="space-x-2 mt-3">
-                                            {(Array.isArray(data.related_links) ? [...data.related_links] : [data.related_links]).map((link, index) =>
-                                                <TooltipProvider key={index}>
-                                                    <Tooltip>
-                                                        <TooltipTrigger className="text-white">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                 height="16" viewBox="0 0 24 24" fill="none"
-                                                                 stroke="currentColor" strokeWidth="2"
-                                                                 strokeLinecap="round" strokeLinejoin="round"
-                                                                 className="lucide lucide-link">
-                                                                <path
-                                                                    d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                                                                <path
-                                                                    d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-                                                            </svg>
-                                                        </TooltipTrigger>
-                                                        <TooltipContent>
-                                                            <a href={link}>{link}</a>
-                                                        </TooltipContent>
-                                                    </Tooltip>
-                                                </TooltipProvider>
-                                            )}
-                                        </div> :
-                                        <div></div>
-                                    }
+                                    ) : (
+                                        <a href={step.related_links} className="text-blue-400 hover:text-blue-300 hover:underline">
+                                            {step.related_links.replace(/^https?:\/\//, "").split("/")[0]}
+                                        </a>
+                                    )}
                                 </div>
                             </div>
-                        </motion.div>
-                    ))}
+                        )}
+                    </motion.div>
                 </div>
-            </div>
+            ))}
+
+            {remark &&
+                <div className="text-white flex gap-6 max-w-3xl">
+                    <div
+                        className="aspect-square flex items-center justify-center w-14 h-14 rounded-full bg-blue-500"
+                    >
+                        <BadgeInfo className="size-7 scale-x-[-1]"/>
+                    </div>
+                    <p className="text-xl pt-3">{remark}</p>
+                </div>
+            }
         </div>
     )
 }

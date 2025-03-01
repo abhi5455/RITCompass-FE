@@ -1,69 +1,35 @@
-import {History, Info, Mail, Mic, Send, UserRound, X} from 'lucide-react';
+import {HandHelping, History, Info, Mail, Mic, Send, UserRound} from 'lucide-react';
 import {useEffect, useState} from "react";
 import GradientText from "../../components/GradientText/GradientText.tsx";
 import {useNavigate} from "react-router-dom";
-import Timeline, {IStep} from "../../components/Timeline.tsx";
 import {WelcomeText} from "../../components/WelcomeText.tsx";
 import axios from "axios";
-import {BASE_URL} from "@/data/data.ts";
-import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle,} from "@/components/ui/sheet"
+import {BASE_URL, NO_PROMPT_YET_MESSAGES} from "@/data/data.ts";
+import {HistorySlideShow} from "@/components/HistorySlideShow.tsx";
+import {LoadingText} from "@/components/LoadingText.tsx";
+import AIMessage from "@/components/AIMessage.tsx";
+import {IReplyMsg} from "@/data/type.ts";
 import {WordRotate} from "@/components/magicui/word-rotate.tsx";
 
-
-const historyData = [
-    {
-        title: 'I want a Bonafied'
-    },
-    {
-        title: 'Apply for scholarship'
-    },
-    {
-        title: 'Apology letter'
-    },
-]
-
-const HistorySlideShow = ({isHistoryVisible, onClose}: {
-    isHistoryVisible: boolean,
-    onClose: (title?: string) => void
-}) => {
-    return (
-        <Sheet open={isHistoryVisible} onOpenChange={() => onClose()}>
-            <SheetContent className={'bg-[#101524] text-white w-fit pr-5 min-w-[300px] p-2'}>
-                <SheetHeader>
-                    <SheetTitle className={'text-gray-400 flex justify-start items-center gap-2'}>
-                        <History/>
-                        History
-                        <button
-                            onClick={() => onClose()}
-                            className="border-none outline-none absolute top-3 right-3 text-gray-400 hover:text-white p-2 rounded-lg transition hover:bg-gray-700 mt-2"
-                        >
-                            <X size={20}/>
-                        </button>
-                    </SheetTitle>
-                    <SheetDescription
-                        className={'text-[#f0f6fc] flex flex-col justify-center items-start px-3 gap-3 mt-10 cursor-pointer'}>
-                        <>
-                            {historyData.map((item, index) => (
-                                <button key={index}
-                                        className={'bg-gray-800 px-3 py-2 rounded-lg flex justify-between items-center w-full cursor-pointer overflow-clip '}
-                                        onClick={() => onClose(item.title)}
-                                ><span className="break-words text-left w-[90%] pr-2">{item.title}</span>
-                                </button>
-                            ))}
-                        </>
-                    </SheetDescription>
-                </SheetHeader>
-            </SheetContent>
-        </Sheet>
-    )
-}
-
-function LoadingText() {
-    return <WordRotate
-        className="text-xl text-white"
-        duration={7000}
-        words={["Thinking...", "Categorizing...", "Querying data...", "Generating..."]}
-    />
+function Header(props: { onClick: () => void | Promise<void>, onClick1: () => void, onClick2: () => void }) {
+    return <header className="flex items-center justify-between px-10 pl-15 min-h-[80px] font-poppins">
+        <img src="/Logo.svg" alt="My Image" width={120}/>
+        <div className={"flex items-center justify-center gap-6 cursor-pointer"}>
+            <Info color={"white"} width={24}
+                  onClick={props.onClick}
+            />
+            <History color={"white"} width={24}
+                     onClick={props.onClick1}
+            />
+            <div
+                className={"flex items-center justify-center bg-[#353c52] text-white text-[13px] w-fit px-3 py-2 rounded-full gap-2 cursor-pointer hover:scale-[1.05] transition-transform duration-250 ease-in-out"}
+                onClick={props.onClick2}
+            >
+                <UserRound height={20} width={20}/>
+                Sign up
+            </div>
+        </div>
+    </header>;
 }
 
 function Home() {
@@ -73,7 +39,7 @@ function Home() {
     const [isTimelineVisible, setIsTimelineVisible] = useState<boolean>(false);
     const [isWelcomeMsgVisible, setIsWelcomeMsgVisible] = useState<boolean>(true);
     const [loading, setLoading] = useState(false);
-    const [timelines, setTimelines] = useState<IStep[][]>([]);
+    const [replyMsgs, setReplyMsgs] = useState<IReplyMsg[]>([]);
     const [isHistoryVisible, setIsHistoryVisible] = useState<boolean>(false);
 
 
@@ -88,6 +54,7 @@ function Home() {
             setGreeting("Good Evening");
         }
     }, []);
+
     useEffect(() => {
         if (isWelcomeMsgVisible) {
             setTimeout(() => {
@@ -101,28 +68,12 @@ function Home() {
     return (
         <div className="flex flex-col h-full w-fullflex-1 min-h-[100vh]">
             <div className="w-full">
-                <header className="flex items-center justify-between px-10 pl-15 min-h-[80px] font-poppins">
-                    <img src="/Logo.svg" alt="My Image" width={120}/>
-                    <div className={'flex items-center justify-center gap-6 cursor-pointer'}>
-                        <Info color={'white'} width={24}
-                              onClick={() => navigate("/info")}
-                        />
-                        <History color={'white'} width={24}
-                                 onClick={() => {
-                                     setIsHistoryVisible(!isHistoryVisible);
-                                 }}
-                        />
-                        <div
-                            className={'flex items-center justify-center bg-[#353c52] text-white text-[13px] w-fit px-3 py-2 rounded-full gap-2 cursor-pointer hover:scale-[1.05] transition-transform duration-250 ease-in-out'}
-                            onClick={() => {
-                                navigate("/auth/signup")
-                            }}
-                        >
-                            <UserRound height={20} width={20}/>
-                            Sign up
-                        </div>
-                    </div>
-                </header>
+                <Header onClick={() => navigate("/info")} onClick1={() => {
+                    setIsHistoryVisible(!isHistoryVisible);
+                }} onClick2={() => {
+                    navigate("/auth/signup")
+                }}/>
+
                 <WelcomeText welcomeMsgVisible={isWelcomeMsgVisible} timelineVisible={isTimelineVisible}
                              greeting={greeting}/>
                 <div
@@ -159,9 +110,9 @@ function Home() {
                                           msg: promptText,
                                           chat_id: 'abc'
                                       }).then((response) => {
-                                          console.log(response.data);
+                                          console.log("RESPONSE:", response.data);
                                           setLoading(false);
-                                          setTimelines(p => [response.data.data.timeline, ...p]);
+                                          setReplyMsgs(p => [...response.data.data, ...p]);
                                       }).catch((error) => {
                                           console.error(error);
                                           setLoading(false);
@@ -181,14 +132,15 @@ function Home() {
             {!isWelcomeMsgVisible &&
                 <div
                     className={'flex flex-col items-center justify-center transition-all duration-500 mt-22 overflow-auto'}>
+                    {loading && <div className="text-center w-full py-5"><LoadingText/></div>}
+                    {!loading && replyMsgs.length === 0 &&
+                        <div className="w-3xl text-gray-500 flex gap-6 items-center mt-10">
+                            <HandHelping/>
+                            <WordRotate words={NO_PROMPT_YET_MESSAGES} duration={5000}/>
+                        </div>
+                    }
                     <div className="divide-y mt-3 divide-gray-700">
-                        {loading && <LoadingText/>}
-
-                        {!loading && timelines.length === 0 ?
-                            <div className="w-full py-5 text-center text-2xl text-white">No data found</div> :
-                            timelines.map((timeline, index) => (
-                                <Timeline timelineData={timeline} key={index}/>
-                            ))}
+                        <AIMessage data={replyMsgs}/>
                     </div>
                 </div>
             }

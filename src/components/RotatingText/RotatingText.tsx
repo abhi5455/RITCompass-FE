@@ -26,9 +26,9 @@ export interface RotatingTextProps
     > {
     texts: string[];
     transition?: Transition;
-    initial?: any;
-    animate?: any;
-    exit?: any;
+    initial?: unknown;
+    animate?: unknown;
+    exit?: unknown;
     animatePresenceMode?: "sync" | "wait";
     animatePresenceInitial?: boolean;
     rotationInterval?: number;
@@ -70,11 +70,13 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
         const [currentTextIndex, setCurrentTextIndex] = useState<number>(0);
 
         const splitIntoCharacters = (text: string): string[] => {
+            // @ts-expect-error - TS doesn't know about Intl.Segmented
             if (typeof Intl !== "undefined" && Intl.Segmenter) {
+                // @ts-expect-error - TS doesn't know about Intl.Segmented
                 const segmenter = new Intl.Segmenter("en", {granularity: "grapheme"});
                 return Array.from(
-                    segmenter.segment(text),
-                    (segment) => segment.segment
+                    // @ts-expect-error - TS doesn't know about Intl.Segmented
+                    segmenter.segment(text), (segment) => segment.segment
                 );
             }
             return Array.from(text);
@@ -229,9 +231,9 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
                   {wordObj.characters.map((char, charIndex) => (
                       <motion.span
                           key={charIndex}
-                          initial={initial}
-                          animate={animate}
-                          exit={exit}
+                          initial={initial as never}
+                          animate={animate as never}
+                          exit={exit as never}
                           transition={{
                               ...transition,
                               delay: getStaggerDelay(
