@@ -20,26 +20,27 @@ export const HistorySlideShow = ({isHistoryVisible, onClose}: {
 }) => {
     return (
         <Sheet open={isHistoryVisible} onOpenChange={() => onClose()}>
-            <SheetContent className={'bg-[#101524] text-white w-fit pr-5 min-w-[300px] p-2'}>
+            <SheetContent className={'bg-[#0c1222] text-white w-fit pr-6 min-w-[320px] p-3 border-r border-gray-800'}>
                 <SheetHeader>
-                    <SheetTitle className={'text-gray-400 flex justify-start items-center gap-2'}>
-                        <History/>
-                        History
+                    <SheetTitle className={'text-gray-300 flex justify-start items-center gap-3 pl-2'}>
+                        <History className="text-[#99a1af] opacity-70"/>
+                        <span className="text-[#99a1af] opacity-70 font-medium">History</span>
                         <button
                             onClick={() => onClose()}
-                            className="border-none outline-none absolute top-3 right-3 text-gray-400 hover:text-white p-2 rounded-lg transition hover:bg-gray-700 mt-2"
+                            className="border-none outline-none absolute top-6 right-4 text-gray-400 hover:text-white p-1.5 rounded-lg transition hover:bg-gray-800/50"
                         >
-                            <X size={20}/>
+                            <X size={18} className=""/>
                         </button>
                     </SheetTitle>
                     <SheetDescription
-                        className={'text-[#f0f6fc] flex flex-col justify-center items-start px-3 gap-3 mt-10 cursor-pointer'}>
+                        className={'text-[#f0f6fc] flex flex-col justify-center items-start px-2 gap-2.5 mt-8 cursor-pointer'}>
                         <>
                             {historyData.map((item, index) => (
                                 <button key={index}
-                                        className={'bg-gray-800 px-3 py-2 rounded-lg flex justify-between items-center w-full cursor-pointer overflow-clip '}
+                                        className={'bg-[#101524] hover:bg-[#1a2035] px-4 py-2.5 rounded-xl flex justify-between items-center w-full cursor-pointer overflow-clip transition-colors duration-200 border border-gray-800/50'}
                                         onClick={() => onClose(item.title)}
-                                ><span className="break-words text-left w-[90%] pr-2">{item.title}</span>
+                                >
+                                    <span className="break-words text-left w-[90%] pr-2 text-sm font-light">{item.title}</span>
                                 </button>
                             ))}
                         </>
