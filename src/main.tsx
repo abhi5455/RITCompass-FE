@@ -5,6 +5,8 @@ import './global.css'
 import SignUp from "./pages/signup/SignUp.tsx";
 import Home from "./pages/home/Home.tsx";
 import Info from "./pages/info/Info.tsx";
+import LetterPage from "@/pages/letter/Letter.tsx";
+import Login from "@/pages/login/Login.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
@@ -13,6 +15,8 @@ createRoot(document.getElementById('root')!).render(
                 <Route path="/" element={<Home/>}/>
                 <Route path="/info" element={<Info/>}/>
                 <Route path="/auth/signup" element={<SignUp/>}/>
+                <Route path="/auth/login" element={<Login/>}/>
+                <Route path="/letter" element={<LetterPage/>}/>
             </Routes>
         </BrowserRouter>
     </StrictMode>
