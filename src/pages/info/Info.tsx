@@ -8,16 +8,21 @@ export default function Info() {
         <div className="flex-1 min-h-screen bg-gray-900 text-white pb-10">
             <header className="fixed top-0 w-full flex items-center justify-between px-10 py-5 font-poppins bg-gray-800">
                 <img src="/Logo.svg" alt="My Image" width={120}/>
-                <House
-                    height={25}
-                    width={25}
-                    color="white"
-                    className="cursor-pointer hover:scale-110 transition-transform duration-200 ease-in-out"
+                <div
+                    className={'absolute group top-4 right-8 flex items-center justify-center w-fit p-2 rounded-[20px] gap-2 cursor-pointer hover:scale-[1.05] transition-transform duration-250 ease-in-out'}
                     onClick={() => navigate("/")}
-                />
+                >
+                    <House height={25} width={25} color="white"
+                           className=""
+                    />
+                    <span
+                        className="absolute top-[40px] right-5 bg-[#4c5674] text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    Home
+                </span>
+                </div>
             </header>
 
-            <div className="flex flex-1 items-center justify-center mt-30">
+            <div className="flex flex-1 items-center justify-center pt-30">
                 <div className="w-4/5 p-6 rounded-2xl bg-[#18213B] text-black shadow-lg">
                     <div className="flex items-center gap-4">
                         <div>

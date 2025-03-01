@@ -40,3 +40,12 @@ npm install
 VITE_BASE_URL="url of the backend"
 ```
 
+## 🎥 Demo
+### 📌 Homepage View
+![img1.png](/public/demoImg1.png)
+
+### 📌 In Action
+![img2.png](/public/demoImg2.png)
+
+### 📌 Info page
+![img3.png](/public/demoImg3.png)

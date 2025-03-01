@@ -17,7 +17,6 @@ export default function SignUp() {
                 <House height={25} width={25} color="white"
                        className=""
                 />
-                {/* Tooltip */}
                 <span
                     className="absolute top-[40px] right-5 bg-[#4c5674] text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                     Home
