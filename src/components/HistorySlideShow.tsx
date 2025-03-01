@@ -1,5 +1,5 @@
 import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle} from "@/components/ui/sheet.tsx";
-import {History, X, Trash2, AlignLeft} from "lucide-react";
+import {History, X, Trash2} from "lucide-react";
 import {useState} from "react";
 
 const historyData = [
