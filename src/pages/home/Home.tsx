@@ -1,4 +1,4 @@
-import {HandHelping, History, Info, Mail, Mic, Send, UserRound} from 'lucide-react';
+import {HandHelping, History, Info, Mail, Mic, Send, UserRound, EllipsisVertical} from 'lucide-react';
 import {useEffect, useState} from "react";
 import GradientText from "../../components/GradientText/GradientText.tsx";
 import {useNavigate} from "react-router-dom";
@@ -10,8 +10,9 @@ import {LoadingText} from "@/components/LoadingText.tsx";
 import AIMessage from "@/components/AIMessage.tsx";
 import {IReplyMsg} from "@/data/type.ts";
 import {WordRotate} from "@/components/magicui/word-rotate.tsx";
+import {MoreFeaturesSlideShow} from "@/components/MoreFeaturesSlideShow.tsx";
 
-function Header(props: { onClick: () => void | Promise<void>, onClick1: () => void, onClick2: () => void }) {
+function Header(props: { onClick: () => void | Promise<void>, onClick1: () => void, onClick2: () => void, onClick3: () => void }) {
     return <header className="flex items-center justify-between px-10 pl-15 min-h-[80px] font-poppins">
         <img src="/Logo.svg" alt="My Image" width={120}/>
         <div className={"flex items-center justify-center gap-6 cursor-pointer"}>
@@ -20,6 +21,9 @@ function Header(props: { onClick: () => void | Promise<void>, onClick1: () => vo
             />
             <History color={"white"} width={24}
                      onClick={props.onClick1}
+            />
+            <EllipsisVertical color={"white"} width={24}
+                              onClick={props.onClick3}
             />
             <div
                 className={"flex items-center justify-center bg-[#353c52] text-white text-[13px] w-fit px-3 py-2 rounded-full gap-2 cursor-pointer hover:scale-[1.05] transition-transform duration-250 ease-in-out"}
@@ -41,6 +45,7 @@ function Home() {
     const [loading, setLoading] = useState(false);
     const [replyMsgs, setReplyMsgs] = useState<IReplyMsg[]>([]);
     const [isHistoryVisible, setIsHistoryVisible] = useState<boolean>(false);
+    const [isMoreFeaturesVisible, setIsMoreFeaturesVisible] = useState<boolean>(false);
 
 
     useEffect(() => {
@@ -72,6 +77,9 @@ function Home() {
                     setIsHistoryVisible(!isHistoryVisible);
                 }} onClick2={() => {
                     navigate("/auth/signup")
+                }}
+                onClick3={() => {
+                    setIsMoreFeaturesVisible(!isMoreFeaturesVisible);
                 }}/>
 
                 <WelcomeText welcomeMsgVisible={isWelcomeMsgVisible} timelineVisible={isTimelineVisible}
@@ -149,6 +157,11 @@ function Home() {
                                   setIsHistoryVisible(false)
                                   setPromptText(title ? title : '');
                               }}
+            />
+            <MoreFeaturesSlideShow isMoreFeaturesVisible={isMoreFeaturesVisible}
+                                   onClose={() => {
+                                       setIsMoreFeaturesVisible(false)
+                                   }}
             />
         </div>
     )
