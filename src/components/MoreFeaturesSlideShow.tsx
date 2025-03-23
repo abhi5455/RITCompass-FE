@@ -12,9 +12,23 @@ const moreFeaturesData = [
     {
         name: 'Calendar',
         image: '/Calendar.png',
+        imageHeight: 53,
+        imageWidth: 53,
+        action: () => window.open('https://drive.google.com/drive/folders/1woT0VLUqgWwqUclkNjNbasXYoqhj6ecJ', '_blank')
+    },
+    {
+        name: 'Series Qs',
+        image: '/QuestionPaper.png',
+        imageHeight: 69,
+        imageWidth: 69,
+        action: () => window.open('https://drive.google.com/drive/folders/1rQNKqpFKu9tfD76teREh6BdbnOCMF_nB', '_blank')
+    },
+    {
+        name: 'Faculty Info',
+        image: '/Faculty.png',
         imageHeight: 52,
         imageWidth: 53,
-        action: () => window.open('https://drive.google.com/your-drive-link', '_blank')
+        action: () => window.location.href = '/faculty-info'
     }
 ];
 
@@ -25,7 +39,7 @@ export const MoreFeaturesSlideShow = ({isMoreFeaturesVisible, onClose}: {
 
     return (
         <Sheet open={isMoreFeaturesVisible} onOpenChange={() => onClose()}>
-            <SheetContent className={'bg-[#0c1222] text-white w-fit min-w-[300px] py-3 pl-2 border-r border-gray-800'}>
+            <SheetContent className={'bg-[#0c1222] text-white min-w-[300px] max-w-[300px] py-3 pl-2 border-r border-gray-800'} style={{maxWidth: 300}}>
                 <SheetHeader>
                     <SheetTitle className={'text-gray-300 flex justify-start items-center gap-3 pl-2'}>
                         <Lightbulb className="text-[#99a1af] opacity-70"/>
