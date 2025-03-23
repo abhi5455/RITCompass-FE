@@ -88,7 +88,8 @@ export const HistorySlideShow = ({isHistoryVisible, onClose}: {
 
     return (
         <Sheet open={isHistoryVisible} onOpenChange={() => onClose()}>
-            <SheetContent className={'bg-[#0c1222] text-white w-fit pr-6 min-w-[320px] py-3 pl-2 border-r border-gray-800'}>
+            <SheetContent
+                className={'bg-[#0c1222] text-white w-fit pr-6 min-w-[320px] py-3 pl-2 border-r border-gray-800'}>
                 <SheetHeader>
                     <SheetTitle className={'text-gray-300 flex justify-start items-center gap-3 pl-2'}>
                         <History className="text-[#99a1af] opacity-70"/>
@@ -104,8 +105,10 @@ export const HistorySlideShow = ({isHistoryVisible, onClose}: {
                         className={'text-[#f0f6fc] flex flex-col justify-center items-start px-2 gap-3 mt-8 cursor-pointer'}>
                         <>
                             {historyData.map((item, index) => (
-                                <ExpandableButton index={index} title={item.title}
-                                                  onDelete={handleDelete} promptHistory={handlePromptHistory} />
+                                <div key={index} className="w-full">
+                                    <ExpandableButton index={index} title={item.title}
+                                                      onDelete={handleDelete} promptHistory={handlePromptHistory}/>
+                                </div>
                             ))}
                         </>
                     </SheetDescription>

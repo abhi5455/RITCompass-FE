@@ -67,7 +67,8 @@ function Home() {
         }, isWelcomeMsgVisible ? 800 : 0);
 
         return () => clearTimeout(timeoutId);
-    }, [isTimelineVisible]);
+    }, [isTimelineVisible, isWelcomeMsgVisible]);
+
 
 
     return (
