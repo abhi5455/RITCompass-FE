@@ -1,4 +1,4 @@
-import {HandHelping, History, Info, Mail, Mic, Send, UserRound, EllipsisVertical} from 'lucide-react';
+import {HandHelping, History, Info, Mail, Mic, Send, UserRound, Lightbulb} from 'lucide-react';
 import {useEffect, useState} from "react";
 import GradientText from "../../components/GradientText/GradientText.tsx";
 import {useNavigate} from "react-router-dom";
@@ -22,7 +22,7 @@ function Header(props: { onClick: () => void | Promise<void>, onClick1: () => vo
             <History color={"white"} width={24}
                      onClick={props.onClick1}
             />
-            <EllipsisVertical color={"white"} width={24}
+            <Lightbulb className="ml-[-3px]" color={"white"} width={26}
                               onClick={props.onClick3}
             />
             <div

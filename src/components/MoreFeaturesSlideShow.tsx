@@ -7,14 +7,16 @@ const moreFeaturesData = [
         image: '/Bus.png',
         imageHeight: 70,
         imageWidth: 70,
+        action: () => window.location.href = '/bus-info'
     },
     {
         name: 'Calendar',
         image: '/Calendar.png',
         imageHeight: 52,
         imageWidth: 53,
+        action: () => window.open('https://drive.google.com/your-drive-link', '_blank')
     }
-]
+];
 
 export const MoreFeaturesSlideShow = ({isMoreFeaturesVisible, onClose}: {
     isMoreFeaturesVisible: boolean,
@@ -38,7 +40,9 @@ export const MoreFeaturesSlideShow = ({isMoreFeaturesVisible, onClose}: {
                     <SheetDescription className="text-[#f0f6fc] flex flex-wrap justify-center items-start px-2 gap-x-8 gap-y-8 mt-8 cursor-pointer">
                         <>
                             {moreFeaturesData.map((item, index) => (
-                            <div key={index} className="relative flex flex-col justify-center items-center px-2 py-3 w-[100px] h-[100px] bg-[#1a2035] rounded-md transition-all duration-200">
+                            <div key={index} className="relative flex flex-col justify-center items-center px-2 py-3 w-[100px] h-[100px] bg-[#1a2035] rounded-md transition-all duration-200"
+                                 onClick={item.action}
+                            >
                                 <img src={item.image} alt="Bus Image" height={item.imageHeight} width={item.imageWidth}
                                      className="mb-5 cursor-pointer hover:scale-[1.1] transition-transform duration-250 ease-in-out mr-1"/>
                                 <div className="absolute bottom-2">{item.name}</div>
