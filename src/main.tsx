@@ -7,6 +7,7 @@ import Home from "./pages/home/Home.tsx";
 import Info from "./pages/info/Info.tsx";
 import LetterPage from "@/pages/letter/Letter.tsx";
 import Login from "@/pages/login/Login.tsx";
+import NotFound from "@/components/404Page.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
                 <Route path="/auth/signup" element={<SignUp/>}/>
                 <Route path="/auth/login" element={<Login/>}/>
                 <Route path="/letter" element={<LetterPage/>}/>
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     </StrictMode>
