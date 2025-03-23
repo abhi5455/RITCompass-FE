@@ -139,7 +139,9 @@ export default function FacultyDirectory() {
                     Home
                 </span>
                 </div>
-
+            </header>
+            {/* Faculty Directory with Departments */}
+            <div className="container mx-auto px-4 pb-16 pt-[100px]">
                 <div className="mb-12 text-center">
                     <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
                         Faculty Directory
@@ -149,9 +151,6 @@ export default function FacultyDirectory() {
                         expertise
                     </p>
                 </div>
-            </header>
-            {/* Faculty Directory with Departments */}
-            <div className="container mx-auto px-4 pb-16 pt-[260px]">
                 <div className="max-w-5xl mx-auto">
 
                     {/* Custom Accordion */}

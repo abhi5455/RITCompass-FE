@@ -75,7 +75,10 @@ export default function BusDirectory() {
                     Home
                 </span>
                 </div>
+            </header>
 
+            {/* Main content */}
+            <main className="max-w-6xl mx-auto pt-[80px]">
                 <div className="mb-12 text-center">
                     <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
                         Bus Directory
@@ -84,10 +87,6 @@ export default function BusDirectory() {
                         Find all available bus services, their current locations, and complete route information
                     </p>
                 </div>
-            </header>
-
-            {/* Main content */}
-            <main className="max-w-6xl mx-auto pt-[260px]">
                 {/* Bus cards */}
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {buses.map((bus) => (
@@ -97,7 +96,7 @@ export default function BusDirectory() {
                         >
                             <div className="flex items-center gap-3 mb-4">
                                 <div className="rounded-full shadow-lg shadow-blue-500/20">
-                                <BusFront className="h-7 w-7 text-white"/>
+                                    <BusFront className="h-7 w-7 text-white"/>
                                 </div>
                                 <h2 className="text-xl font-semibold">Bus {bus.busNo}</h2>
                             </div>

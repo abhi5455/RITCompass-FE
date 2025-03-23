@@ -10,6 +10,7 @@ body {
 }
 *{
     scrollbar-width: none;
+    scroll-behavior: smooth;
 }
 
 :root {
