@@ -26,8 +26,8 @@ const moreFeaturesData = [
     {
         name: 'Faculty Info',
         image: '/Faculty.png',
-        imageHeight: 52,
-        imageWidth: 53,
+        imageHeight: 58,
+        imageWidth: 59,
         action: () => window.location.href = '/faculty-info'
     }
 ];
@@ -51,10 +51,10 @@ export const MoreFeaturesSlideShow = ({isMoreFeaturesVisible, onClose}: {
                             <X size={18} className=""/>
                         </button>
                     </SheetTitle>
-                    <SheetDescription className="text-[#f0f6fc] flex flex-wrap justify-center items-start px-2 gap-x-8 gap-y-8 mt-8 cursor-pointer">
+                    <SheetDescription className="text-[#f0f6fc] flex flex-wrap justify-center items-start px-2 gap-x-6 gap-y-8 mt-8 cursor-pointer">
                         <>
                             {moreFeaturesData.map((item, index) => (
-                            <div key={index} className="relative flex flex-col justify-center items-center px-2 py-3 w-[100px] h-[100px] bg-[#1a2035] hover:bg-[#1f293d] rounded-md transition-all duration-200"
+                            <div key={index} className="relative flex flex-col justify-center items-center px-2 py-3 w-[100px] h-[109px] bg-[#1a2035] hover:bg-[#1f293d] rounded-md transition-all duration-200"
                                  onClick={item.action}
                             >
                                 <img src={item.image} alt="Bus Image" height={item.imageHeight} width={item.imageWidth}

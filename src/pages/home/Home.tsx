@@ -60,15 +60,15 @@ function Home() {
         }
     }, []);
 
+
     useEffect(() => {
-        if (isWelcomeMsgVisible) {
-            setTimeout(() => {
-                setIsWelcomeMsgVisible(!isTimelineVisible);
-            }, 800);
-        } else {
+        const timeoutId = setTimeout(() => {
             setIsWelcomeMsgVisible(!isTimelineVisible);
-        }
+        }, isWelcomeMsgVisible ? 800 : 0);
+
+        return () => clearTimeout(timeoutId);
     }, [isTimelineVisible]);
+
 
     return (
         <div className="flex flex-col h-full w-fullflex-1 min-h-[100vh]">

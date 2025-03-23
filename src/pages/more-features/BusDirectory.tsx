@@ -110,11 +110,11 @@ export default function BusDirectory() {
                                             <MapPin className="h-4 w-4 text-white"/>
                                         </div>
                                         <div className="flex-1">
-                                            <div className="flex justify-between items-center gap-3">
+                                            <div className="flex justify-between items-center gap-15">
                                                 <p className="text-sm text-gray-400">Current Location</p>
                                                 <div className="flex items-center text-xs text-gray-500">
                                                     <Clock className="h-3 w-3 mr-1"/>
-                                                    <span>Updated {bus.lastUpdated}</span>
+                                                    <span>{bus.lastUpdated}</span>
                                                 </div>
                                             </div>
                                             <p>{bus.currentLocation}</p>
