@@ -40,7 +40,7 @@ export const MoreFeaturesSlideShow = ({isMoreFeaturesVisible, onClose}: {
                     <SheetDescription className="text-[#f0f6fc] flex flex-wrap justify-center items-start px-2 gap-x-8 gap-y-8 mt-8 cursor-pointer">
                         <>
                             {moreFeaturesData.map((item, index) => (
-                            <div key={index} className="relative flex flex-col justify-center items-center px-2 py-3 w-[100px] h-[100px] bg-[#1a2035] rounded-md transition-all duration-200"
+                            <div key={index} className="relative flex flex-col justify-center items-center px-2 py-3 w-[100px] h-[100px] bg-[#1a2035] hover:bg-[#1f293d] rounded-md transition-all duration-200"
                                  onClick={item.action}
                             >
                                 <img src={item.image} alt="Bus Image" height={item.imageHeight} width={item.imageWidth}
