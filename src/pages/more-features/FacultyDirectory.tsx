@@ -4,7 +4,22 @@ import {useState} from "react"
 import {ChevronDown, House} from "lucide-react"
 import {useNavigate} from "react-router-dom";
 
-const departments = [
+type FacultyMember = {
+    id: number;
+    name: string;
+    designation: string;
+    phone: string;
+    email: string;
+    image?: string;
+};
+
+type Department = {
+    id: string;
+    name: string;
+    faculty: FacultyMember[];
+};
+
+const departments: Department[] = [
     {
         id: "cse",
         name: "Computer Science & Engineering (CSE)",
@@ -199,8 +214,8 @@ export default function FacultyDirectory() {
                                                             />
                                                         ) : (
                                                             <span className="text-[#f2ddcc] font-medium">
-                                            {faculty.name.split(" ").map((n) => n[0]).join("")}
-                                        </span>
+                                                                {faculty.name.split(" ").map((n) => n[0]).join("")}
+                                                            </span>
                                                         )}
                                                     </div>
                                                     <div className="space-y-1">
